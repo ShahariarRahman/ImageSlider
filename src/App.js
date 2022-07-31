@@ -1,10 +1,8 @@
 import './App.css';
 import { Box, Grid } from '@mui/material';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import Stack from '@mui/material/Stack';
 
 import img1 from './assets/img1.jpg';
 import img2 from './assets/img2.jpg';
@@ -15,12 +13,9 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [imagesData, setImagesData] = useState([]);
-  const [showImg, setShowImg] = useState(3);
-  const [startImgSlice, setStartImgSlice] = useState(showImg - 3);
-  const [endImgSlice, setEndImgSlice] = useState(showImg + 2);
+  const [showImg, setShowImg] = useState(1);
   const [slicedImagesData, setSlicedImagesData] = useState([]);
-  const [data, setData] = useState([]);
-  const [count, setCount] = useState(0);
+  const [deletedImagesData, setDeletedImagesData] = useState([]);
 
 
   useEffect(() => {
@@ -29,47 +24,52 @@ function App() {
       { id: 2, name: 'kid', img: img2, descrption: 'descrpition2' },
       { id: 3, name: 'cute kid', img: img3, descrption: 'descrpition3' },
       { id: 4, name: 'father', img: img4, descrption: 'descrpition4' },
-      { id: 5, name: 'father', img: img5, descrption: 'descrpition5' },
-      { id: 6, name: 'father', img: img4, descrption: 'descrpition4' }
+      { id: 5, name: 'father', img: img5, descrption: 'descrpition5' }
     ]);
-    setCount(-imagesData.length + 3);
-  }, [imagesData.length]);
+  }, []);
 
   useEffect(() => {
-    if (imagesData.length > 5) {
-      console.log(count);
-      setSlicedImagesData([...imagesData.slice(startImgSlice, endImgSlice), imagesData[count]]);
-    }
-  }, [imagesData.length, imagesData, startImgSlice, endImgSlice, count]);
-
-
-
+    const deletedData = imagesData.splice(5);
+    setSlicedImagesData(imagesData);
+    setDeletedImagesData(deletedData);
+  }, [imagesData]);
 
   const showingImgData = imagesData.find(image => image.id === showImg);
-
-  const handleRightArrow = () => {
-    if (count >= imagesData.length - 1) {
-      setCount(-imagesData.length + 3);
-    }
-    else {
-      setCount(count + 1);
-    }
-
+  const handleRightArrow = async () => {
     if (showImg < imagesData.length) {
       setShowImg(showImg + 1);
-      setStartImgSlice(startImgSlice + 1);
-      setEndImgSlice(endImgSlice + 1);
+
+      const deletedData = imagesData.splice(0, 1);
+      deletedImagesData.push(...deletedData);
+      setImagesData([...imagesData, ...deletedImagesData]);
+
     }
     else {
       setShowImg(1);
+      const deletedData = imagesData.splice(0, 1);
+      deletedImagesData.push(...deletedData);
+      setImagesData([...imagesData, ...deletedImagesData]);
     }
   }
   const handleLeftArrow = () => {
     if (showImg > 1) {
       setShowImg(showImg - 1);
+
+      const deletedData = imagesData.splice(imagesData.length - 1, 1);
+      console.log(deletedData);
+      deletedImagesData.unshift(...deletedData);
+      console.log(deletedImagesData);
+      setImagesData([...deletedImagesData, ...imagesData]);
+
     }
     else {
       setShowImg(imagesData.length);
+
+      const deletedData = imagesData.splice(imagesData.length - 1, 1);
+      console.log(deletedData);
+      deletedImagesData.unshift(...deletedData);
+      setImagesData([...deletedImagesData, ...imagesData]);
+      console.log(deletedImagesData);
     }
   }
 
@@ -83,9 +83,7 @@ function App() {
       <Box sx={{ flexGrow: 1 }} mt="3rem">
         <Grid container>
           <Grid item md={7} xs={12} sx={{ bgcolor: 'primary.main' }}>
-
             <img style={{ borderRadius: '40px', width: '1000px' }} src={showingImgData?.img} alt="" />
-
             <Box mt="1rem" sx={{ display: 'flex', alignItems: 'center' }}>
 
               <IconButton color='inherit' disableRipple
