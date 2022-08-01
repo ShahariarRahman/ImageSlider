@@ -140,9 +140,11 @@ function App() {
 
             </Grid>
           </Grid>
-          <Grid item lg={4} md={12} sx={{ position: 'relative', paddingBottom: '10rem' }}>
-
-            <Typography variant="h6" component="h2" align='left' padding={2}>
+          <Grid item lg={4} md={12} sx={{ position: 'relative', paddingBottom: '10rem', color: 'gray' }}>
+            <Typography variant="h2" component="h2" align='left' padding={2}>
+              {showingImgData?.name}
+            </Typography>
+            <Typography variant="h6" component="h1" align='left' padding={2} style={{ fontSize: '16px' }}>
               {showingImgData?.descrption}
             </Typography>
 
