@@ -1,38 +1,72 @@
-.App {
+body {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@media only screen and (max-width: 400px) {
+  .mainImage {
+    width: 250px;
+    padding: 0 10px;
+    border-radius: 0px;
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .allImages {
+    width: 200px;
+  }
+
+  .arrow {
+    display: block;
+    width: 100%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (min-width: 401px) and (max-width: 600px) {
+  .mainImage {
+    width: 300px;
+    padding: 0 10px;
+    border-radius: 0px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .allImages {
+    width: 700px;
+  }
+
+  .arrow {
+    display: block;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+  .mainImage {
+    width: 500px;
+    padding: 0 10px;
+    border-radius: 0px;
+  }
+
+  .allImages {
+    max-width: 100px;
+  }
+
+  .arrow {
+    display: block;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1200px) {
+  .arrow {
+    display: block;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1620px) {
+  .allImages {
+    width: 120px;
+  }
+
+  .arrow {
+    display: block;
+    width: 100%;
   }
 }
