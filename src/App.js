@@ -60,32 +60,29 @@ function App() {
       setImagesData([...imagesData, ...deletedImagesData]);
     }
   }
+
+
   const handleLeftArrow = () => {
     if (showingImage > 1) {
       setShowingImage(showingImage - 1);
-
       const deletedData = imagesData.splice(imagesData.length - 1, 1);
-      console.log(deletedData);
       deletedImagesData.unshift(...deletedData);
-      console.log(deletedImagesData);
       setImagesData([...deletedImagesData, ...imagesData]);
 
     }
     else {
       setShowingImage(imagesData.length);
-
       const deletedData = imagesData.splice(imagesData.length - 1, 1);
-      console.log(deletedData);
       deletedImagesData.unshift(...deletedData);
       setImagesData([...deletedImagesData, ...imagesData]);
-      console.log(deletedImagesData);
     }
   }
 
 
-  const handleClickOnImg = (imageId) => {
+  const handleClickOnImage = (imageId) => {
     setShowingImage(imageId);
   }
+
   const handleAutoImgChange = () => {
     setIsSlideShow(!isSlideshow);
   }
@@ -111,7 +108,7 @@ function App() {
                     <IconButton color='inherit' disableRipple>
                       <img
                         className='allImages'
-                        src={image.img} alt="" onClick={() => handleClickOnImg(image.id)}
+                        src={image.img} alt="" onClick={() => handleClickOnImage(image.id)}
                         style={showingImage === image.id ?
                           { borderRadius: '10px', maxWidth: '180px' }
                           :
@@ -127,7 +124,7 @@ function App() {
                     <IconButton color='inherit' disableRipple>
                       <img
                         className='allImages'
-                        src={image.img} alt="" onClick={() => handleClickOnImg(image.id)}
+                        src={image.img} alt="" onClick={() => handleClickOnImage(image.id)}
                         style={showingImage === image.id ?
                           { borderRadius: '10px', maxWidth: '180px', }
                           :
